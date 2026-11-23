@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/psqsystem/OilOEE/data/schemas/work_order.schema.json",
+  "title": "WorkOrder",
+  "description": "A single industrial work-order report aligned with OEE components.",
+  "type": "object",
+  "required": [
+    "work_order_id",
+    "equipment_id",
+    "site_id",
+    "shift",
+    "event_timestamp",
+    "description",
+    "downtime_minutes",
+    "oee_component",
+    "failure_mode",
+    "severity",
+    "supervisor_validated"
+  ],
+  "properties": {
+    "work_order_id": {
+      "type": "string",
+      "description": "Unique identifier of the work order.",
+      "minLength": 1
+    },
+    "equipment_id": {
+      "type": "string",
+      "description": "Equipment or asset identifier.",
+      "minLength": 1
+    },
+    "site_id": {
+      "type": "string",
+      "description": "Site or plant identifier.",
+      "minLength": 1
+    },
+    "shift": {
+      "type": "string",
+      "enum": ["day", "swing", "night"],
+      "description": "Production shift during which the event occurred."
+    },
+    "event_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of the event."
+    },
+    "description": {
+      "type": "string",
+      "description": "Free-text report from the operator or technician.",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "action_taken": {
+      "type": "string",
+      "description": "Corrective action performed, if any.",
+      "maxLength": 2000
+    },
+    "downtime_minutes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Downtime caused by the event, in minutes."
+    },
+    "oee_component": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["availability", "performance", "quality", "non-oee"]
+      },
+      "minItems": 1,
+      "description": "OEE component(s) affected by the event."
+    },
+    "failure_mode": {
+      "type": "string",
+      "description": "Controlled-vocabulary failure mode label.",
+      "minLength": 1
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["minor", "moderate", "major"],
+      "description": "Assessed severity of the event."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Labeler confidence in the assigned labels."
+    },
+    "supervisor_validated": {
+      "type": "boolean",
+      "description": "Whether a qualified supervisor has accepted the label."
+    },
+    "validated_by": {
+      "type": "string",
+      "description": "Anonymized supervisor identifier (must not be a real name)."
+    },
+    "validated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of supervisor validation."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional non-sensitive notes.",
+      "maxLength": 1000
+    }
+  },
+  "additionalProperties": false
+}
