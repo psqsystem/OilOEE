@@ -1,0 +1,46 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment
+.env
+.env.*
+
+# Raw / sensitive data stays out of git
+data/raw/*
+!data/raw/.gitkeep
+data/samples/*
+!data/samples/.gitkeep
+data/labels/*
+!data/labels/.gitkeep
+
+# Notebooks
+.ipynb_checkpoints/
+
+# IDE and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Model artifacts
+/models/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+
+# ML / DVC
+mlruns/
+.dvc/
